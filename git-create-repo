@@ -1,0 +1,6 @@
+#!/bin/sh
+
+read -p 'Repository Name :' repo_name 
+test -z $repo_name && echo "Repo name must be filled" 1>&2 
+
+curl -u 'dekiakbar' https://api.github.com/user/repos -d "{\"name\":\"$repo_name\"}"
