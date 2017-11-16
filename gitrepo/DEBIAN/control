@@ -1,0 +1,11 @@
+Package: gitrepo
+Version: 0.01
+Architecture: all
+Maintainer: Deki <Dekiakbar@linuxmail.org>
+Installed-Size: 1
+Section: Addons
+Depends: git,curl
+Manpage: https://github.com/dekiakbar/LinuxShell
+Priority: optional
+Description: This tool use to make a repository on github using your terminal, 
+ also this tool come with no warranty, use with your own risk.
