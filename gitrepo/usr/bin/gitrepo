@@ -2,15 +2,40 @@
 
 function _help()
 {
-	echo "
-Gitrepo 0.01 ( https://github.com/dekiakbar/LinuxShell )
-Usage: gitrepo [Options ...] [] 
+	
+printf "Gitrepo 0.01 ( https://github.com/dekiakbar/LinuxShell )
+	Usage: gitrepo [-h] [-v] [-c] [-n <repository_name>] or [-n <repository_name>:<license>]
+
 [Options]
 	-c : Check and list all repository
 	-h : Show this help
 	-n : Create new repository
 	-v : Show the version of this package
-Happy code"
+	"
+echo "
+[License Options]"
+echo "	afl-3.0				isc"
+echo "	agpl-3.0			lgpl-2.1"
+echo "	apache-2.0			lgpl-3.0"
+echo "	artistic-2.0       		lppl-1.3c"
+echo "	bsd-2-clause			mit"
+echo "	bsd-3-clause-clear		mpl-2.0"
+echo "	bsd-3-clause 			ms-pl"
+echo "	bsl-1.0				ms-rl"
+echo "	cc-by-4.0			ncsa"
+echo "	cc-by-sa-4.0			ofl-1.1"
+echo "	cc0-1.0				osl-3.0"
+echo "	ecl-2.0				postgresql"
+echo "	epl-1.0				unlicense"
+echo "	eupl-1.1			wtfpl"
+echo "	gpl-2.0				zlib"
+echo "	gpl-3.0"
+
+printf "
+[Example] 
+	gitrepo -n coba:mit
+	gitrepo -n coba
+"
 }
 
 function _cekrepo(){
@@ -35,6 +60,8 @@ function _cekrepo(){
 function _buatrepo(){
 		namarepo=${argumen[0]}
 		lisensi=${argumen[1]}
+		echo $namarepo
+		echo $lisensi
 	read -p 'Github username :' username 
 	if [[ -n $namarepo && -n $username && -n $lisensi ]]; then
 		curl -u $username https://api.github.com/user/repos -d "{\"name\":\"$namarepo\",\"license_template\":\"$lisensi\"}"
@@ -50,7 +77,7 @@ function _buatrepo(){
 	fi
 }
 
-while getopts ":c:l:hn:v" opt; do
+while getopts ":chn:v" opt; do
   case $opt in
 	  	c)  _cekrepo;;
 
