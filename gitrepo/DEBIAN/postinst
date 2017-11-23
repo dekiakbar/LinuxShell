@@ -1,6 +1,0 @@
-#! /bin/bash
-echo '';
-echo 'This Package has no warranty,use by your own risk!';
-echo 'Made by Deki Akbar <dekiakbar@linuxmail.org>';
-echo 'For more information https://github.com/dekiakbar/LinuxShell';
-
