@@ -12,10 +12,8 @@ Usage: gitrepo [Options]
 Happy code"
 }
 
-_help
-
-while getopts ":c:n:h" opt; do
-	case $opt in
+while getopts ":chn:v" opt; do
+  case $opt in
 	  	c)  read -p "Github Username :" username
 			if [[ -n $username ]]; then
 				curl -g -u $username  https://api.github.com/user/repos
@@ -39,9 +37,9 @@ while getopts ":c:n:h" opt; do
 			fi
 			fi
 	      ;;
-	    \?)
-	      echo "Invalid option: -$OPTARG" >&2
-	      ;;
-	esac
+	    v)	printf "v0.1" ;;
+	    \?)	echo "Invalid option: -$OPTARG" >&2 ;;
+	    *)	echo "Need an argument!";;
+  esac
 done
 
