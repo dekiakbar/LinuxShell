@@ -4,41 +4,63 @@ function _help()
 {
 	echo "
 Gitrepo 0.01 ( https://github.com/dekiakbar/LinuxShell )
-Usage: gitrepo [Options] 
+Usage: gitrepo [Options ...] [] 
 [Options]
 	-c : Check and list all repository
 	-h : Show this help
 	-n : Create new repository
+	-v : Show the version of this package
 Happy code"
 }
 
-while getopts ":chn:v" opt; do
+function _cekrepo(){
+	read -p "Github Username :" username
+	if [[ -n $username ]]; then
+		ambil="$(curl -s -g https://api.github.com/users/$username/repos | grep 'name')"
+		IFS=','
+		hasil=($ambil)
+		for i in ${hasil[@]}; do 
+			if [[ $hitung < 2 ]]; then
+			 	echo $i;
+			 	hitung=$((hitung+1))
+			else 
+				hitung=0; 
+			fi 
+		done 
+	else
+		echo "Username must be filled"
+	fi
+}
+
+function _buatrepo(){
+	read -p 'Github username :' username
+	# read -p 'Repository Name :' reponame 
+	if [[ -n $username && -n $reponame ]]; then
+		curl -u $username https://api.github.com/user/repos -d "{\"name\":\"$repo_name\"}"
+	else if [[ -z $username ]]; then
+		echo "Username must be filled"
+	else if [[ -z $reponame ]]; then
+		echo "Repository name must be filled"
+	fi
+	fi
+	fi
+}
+
+while getopts ":c:l:hnv" opt; do
   case $opt in
-	  	c)  read -p "Github Username :" username
-			if [[ -n $username ]]; then
-				curl -g -u $username  https://api.github.com/user/repos
-			else
-				echo "Username must be filled"
-			fi
-			;;
+	  	c)  _cekrepo;;
 
-	    h)  _help
-			;;
+	    h)  _help;;
 
-	    n)  read -p 'Github username :' username
-			read -p 'Repository Name :' reponame 
-			if [[ -n $username && -n $reponame ]]; then
-				curl -u $username https://api.github.com/user/repos -d "{\"name\":\"$repo_name\"}"
-			else if [[ -z $username ]]; then
-				echo "Username must be filled"
-			else if [[ -z $reponame ]]; then
-				echo "Repository name must be filled"
-			fi
-			fi
-			fi
-	      ;;
-	    v)	printf "v0.1" ;;
+	    n)  reponame=$OPTARG
+			_buatrepo($reponame);;
+
+		l)  lisensi=$OPTARG;;
+
+	    v)	echo "`basename $0` version 0.1" ;;
+
 	    \?)	echo "Invalid option: -$OPTARG" >&2 ;;
+
 	    *)	echo "Need an argument!";;
   esac
 done
