@@ -39,7 +39,7 @@ printf "
 }
 
 function _cekrepo(){
-	read -p "Github Username :" username
+	username=${username}
 	if [[ -n $username ]]; then
 		ambil="$(curl -s -g https://api.github.com/users/$username/repos | grep 'name')"
 		IFS=','
@@ -75,9 +75,10 @@ function _buatrepo(){
 	fi
 }
 
-while getopts ":chn:v" opt; do
+while getopts ":c:hn:v" opt; do
   case $opt in
-	  	c)  _cekrepo;;
+	  	c)  username=$OPTARG
+			_cekrepo ;;
 
 	    h)  _help;;
 
@@ -89,7 +90,7 @@ while getopts ":chn:v" opt; do
 
 	    v)	echo "`basename $0` version 0.1" ;;
 
-	    \?)	echo "Invalid option: -$OPTARG" >&2 ;;
+	   \?)	echo "Invalid option: -$OPTARG" >&2 ;;
 
 	    *)	echo "Need an argument!";;
   esac
