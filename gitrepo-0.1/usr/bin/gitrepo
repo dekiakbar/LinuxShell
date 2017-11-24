@@ -4,12 +4,12 @@ function _help()
 {
 	
 printf "Gitrepo 0.01 ( https://github.com/dekiakbar/LinuxShell )
-	Usage: gitrepo [-h] [-v] [-c] [-n <repository_name>] or [-n <repository_name>:<license>]
+	Usage: gitrepo [-h] [-v] [-c username] [-n <repository_name>] or [-n <repository_name>:<license>]
 
 [Options]
-	-c : Check and list all repository
+	-c <username> : Check and list all repository
 	-h : Show this help
-	-n : Create new repository
+	-n <repository_name> OR <repository_name>:<license> : Create new repository
 	-v : Show the version of this package
 	"
 echo "
