@@ -33,8 +33,9 @@ echo "	gpl-3.0"
 
 printf "
 [Example] 
-	gitrepo -n coba:mit
+	gitrepo -n coba:gpl-3.0
 	gitrepo -n coba
+	gitrepo -c username
 "
 }
 
