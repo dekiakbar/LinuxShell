@@ -1,0 +1,49 @@
+#!/bin/bash
+
+function _help()
+{
+	
+printf "Kepo-1 ( https://github.com/dekiakbar/LinuxShell )
+	Format: kepo [-h] | [-v] | [-k] [keyword] 
+
+[Pilihan]
+	-h : Menampilkan bantuan ini
+	-v : Menampilkan versi software
+	-k : <katakunci>
+	"
+printf "
+[Contoh] 
+	kepo -v
+	kepo -h
+	kepo -k komputer
+	kepo -k linux
+"
+}
+
+function _definisi(){
+	keyword=${keyword}
+	if [[ -n $keyword ]]; then
+		curl -s 'https://id.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles='$keyword | jq -r '.query.pages[].extract'
+	fi
+}
+
+while getopts ":hvk:" opt; do
+	case $opt in
+		k)	keyword=$OPTARG
+			_definisi;;	 
+
+	    h)  _help;;
+
+	    v)	echo "`basename $0` version 0.1" ;;
+
+	   \?)	echo "Perintah Tidak Dikenal: -$OPTARG" >&2 ;;
+		
+		*)	_help;;
+
+  	esac
+done
+
+if [ "$opt" = "?" ]
+then
+  _help;
+fi

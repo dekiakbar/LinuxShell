@@ -1,0 +1,10 @@
+Package: kepo
+Version: 1
+Architecture: all
+Maintainer: Deki <Dekiakbar@linuxmail.org>
+Installed-Size: 0.5
+Section: Addons
+Depends: curl,jq
+Manpage: https://github.com/dekiakbar/LinuxShell
+Priority: optional
+Description: Paket ini dibuat untuk mencari definisi dari sebuah kata,sumber tersebut diambil dari https://id.wikipedia.org.

@@ -1,0 +1,6 @@
+#! /bin/bash
+echo '';
+echo 'Aplikasi ini dibuat untuk mencari definisi dari sebuah kata'
+echo 'Made by Deki Akbar <dekiakbar@linuxmail.org>'
+echo 'Fork jika ingin berkontribusi https://github.com/dekiakbar/LinuxShell'
+echo 'Terima Kasih'
